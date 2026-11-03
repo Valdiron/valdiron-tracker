@@ -146,8 +146,8 @@ create policy "profile owner can update" on public.profiles for update to authen
 
 create policy "owner manages tracked accounts" on public.tracked_accounts for all to authenticated
 using (owner_id = auth.uid()) with check (owner_id = auth.uid());
-create policy "owner manages authorizations" on public.authorizations for all to authenticated
-using (owner_id = auth.uid()) with check (owner_id = auth.uid());
+create policy "owner reads authorizations" on public.authorizations for select to authenticated
+using (owner_id = auth.uid());
 create policy "owner reads snapshots" on public.account_snapshots for select to authenticated using (owner_id = auth.uid());
 create policy "owner reads alerts" on public.alerts for select to authenticated using (owner_id = auth.uid());
 create policy "owner updates alerts" on public.alerts for update to authenticated using (owner_id = auth.uid()) with check (owner_id = auth.uid());
@@ -159,6 +159,7 @@ using (owner_id = auth.uid()) with check (owner_id = auth.uid());
 create policy "owner reads audit logs" on public.audit_logs for select to authenticated using (actor_id = auth.uid());
 
 -- Clients may read their own records. Snapshot/alert/analysis/audit writes are reserved for trusted backend jobs.
+revoke insert, update, delete on public.authorizations from anon, authenticated;
 revoke insert, update, delete on public.account_snapshots from anon, authenticated;
 revoke insert, update, delete on public.alerts from anon, authenticated;
 revoke insert, update, delete on public.ai_analyses from anon, authenticated;
