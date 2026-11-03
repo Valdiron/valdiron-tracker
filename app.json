@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "Valdiron Tracker",
+    "slug": "valdiron-tracker",
+    "scheme": "valdirontracker",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "plugins": ["expo-router", "expo-notifications"],
+    "android": {
+      "package": "com.valdiron.tracker",
+      "adaptiveIcon": { "backgroundColor": "#080D1A" }
+    }
+  }
+}
